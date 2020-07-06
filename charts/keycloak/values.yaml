@@ -20,7 +20,7 @@ clusterDomain: cluster.local
 # nameOverride: keycloak
 
 keycloak:
-  replicas: 1
+  replicas: 2
 
   image:
     repository: docker.io/jboss/keycloak
@@ -262,7 +262,7 @@ keycloak:
 
     ## List of hosts for the ingress
     hosts:
-      - keycloak.example.com
+      - keycloak.dynamic1001.com
 
     ## TLS configuration
     tls: []
@@ -299,11 +299,11 @@ keycloak:
     deployPostgres: false
 
     # The database vendor. Can be either "postgres", "mysql", "mariadb", or "h2"
-    dbVendor: h2
+    dbVendor: postgres
 
     ## The following values only apply if "deployPostgres" is set to "false"
     dbName: keycloak
-    dbHost: mykeycloak
+    dbHost: acid-keycloak
     dbPort: 5432
 
     ## Database Credentials are loaded from a Secret residing in the same Namespace as keycloak.
