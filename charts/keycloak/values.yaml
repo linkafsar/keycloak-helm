@@ -77,13 +77,13 @@ keycloak:
           - name: theme
             mountPath: /CrmLogInTheme
   extraPorts: ""
-  #extraVolumeMounts: |
-      - name: theme
-        mountPath: /CrmLogInTheme
-        emptyDir: {}    
-  #extraVolumes: |
-      - name: theme
-        mountPath: /CrmLogInTheme
+  # extraVolumeMounts: |
+  #    - name: theme
+  #     mountPath: /CrmLogInTheme
+  #     emptyDir: {}    
+  # extraVolumes: |
+  #   - name: theme
+  #      mountPath: /CrmLogInTheme
   hostAliases: []
   image: 
     pullPolicy: IfNotPresent
