@@ -60,8 +60,8 @@ keycloak:
       #   value: true
       # - name: DB_USE_CAST_FAIL
       #   value: false
-  extraInitContainers:
-    - name: theme-provider
+  extraInitContainers: |
+      - name: theme-provider
       image: myuser/mytheme:1
       imagePullPolicy: IfNotPresent
       command:
@@ -75,13 +75,12 @@ keycloak:
         - name: theme
           mountPath: /theme
   extraPorts: ""
-  extraVolumeMounts: |
-      - name: theme
-        mountPath: /CrmLogInTheme
-  #     emptyDir: {}    
-  extraVolumes: |
+  #extraVolumeMounts: "- name: theme\n\
+  #   \x20 mountPath: /theme\n\
+  #    \x20 emptyDir: {}    \n"
+  #extraVolumes: |
   #   - name: theme
-  #      mountPath: /CrmLogInTheme
+  #      mountPath: /theme
   hostAliases: []
   image: 
     pullPolicy: IfNotPresent
@@ -166,7 +165,7 @@ keycloak:
   serviceAccount: 
     create: false
     name: ~
-  startupScripts: ""
+  startupScripts: "mkdir -p /opt/jboss/keycloak/themes/my-theme && cp -R /theme/* /opt/jboss/keycloak/themes/my-theme/"
   statefulsetAnnotations: {}
   terminationGracePeriodSeconds: 60
   tolerations: []
