@@ -174,7 +174,7 @@ keycloak:
   serviceAccount: 
     create: false
     name: ~
-  startupScripts: "mkdir -p /opt/jboss/keycloak/themes/my-theme && cp -R /theme/* /opt/jboss/keycloak/themes/my-theme/"
+  startupScripts: ""
   statefulsetAnnotations: {}
   terminationGracePeriodSeconds: 60
   tolerations: []
