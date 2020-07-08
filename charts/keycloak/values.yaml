@@ -63,8 +63,6 @@ keycloak:
   extraInitContainers: |
       - name: theme-provider
         image: gcr.io/mtpo-prod/tax/keycloak-theme
-        imagePullSecrets:
-          - name: mtpo-prod-regsecret
         imagePullPolicy: Always
         command:
           - sh
