@@ -66,13 +66,6 @@ keycloak:
         imagePullSecrets:
           - name: mtpo-prod-regsecret
         imagePullPolicy: Always
-        resources:
-          limits:
-            cpu: "20m"
-            memory: "64Mi"
-          requests:
-            cpu: "10m"
-            memory: "32Mi"
         command:
           - sh
         args:
@@ -84,10 +77,11 @@ keycloak:
           - name: theme
             mountPath: /CrmLogInTheme
   extraPorts: ""
-  extraVolumeMounts: "- name: theme\n\
-      \x20 mountPath: /CrmLogInTheme\n\
-      \x20 emptyDir: {}    \n"
-  extraVolumes: |
+  #extraVolumeMounts: |
+      - name: theme
+        mountPath: /CrmLogInTheme
+        emptyDir: {}    
+  #extraVolumes: |
       - name: theme
         mountPath: /CrmLogInTheme
   hostAliases: []
