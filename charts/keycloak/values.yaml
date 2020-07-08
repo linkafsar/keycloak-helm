@@ -62,18 +62,18 @@ keycloak:
       #   value: false
   extraInitContainers: |
       - name: theme-provider
-      image: myuser/mytheme:1
-      imagePullPolicy: IfNotPresent
-      command:
-        - sh
-      args:
-        - -c
-        - |
-          echo "Copying theme..."
-          cp -R /mytheme/* /theme
-      volumeMounts:
-        - name: theme
-          mountPath: /theme
+        image: myuser/mytheme:1
+        imagePullPolicy: IfNotPresent
+        command:
+          - sh
+        args:
+          - -c
+          - |
+            echo "Copying theme..."
+            cp -R /mytheme/* /theme
+        volumeMounts:
+          - name: theme
+            mountPath: /theme
   extraPorts: ""
   #extraVolumeMounts: "- name: theme\n\
   #   \x20 mountPath: /theme\n\
