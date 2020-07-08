@@ -78,9 +78,9 @@ keycloak:
   #extraVolumeMounts: "- name: theme\n\
   #   \x20 mountPath: /theme\n\
   #    \x20 emptyDir: {}    \n"
-  #extraVolumes: |
-  #   - name: theme
-  #      mountPath: /theme
+  extraVolumes: |
+     - name: theme
+        mountPath: /theme
   hostAliases: []
   image: 
     pullPolicy: IfNotPresent
