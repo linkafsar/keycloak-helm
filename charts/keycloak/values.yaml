@@ -20,7 +20,7 @@ clusterDomain: cluster.local
 # nameOverride: keycloak
 
 keycloak:
-  replicas: 2
+  replicas: 3
 
   image:
     repository: docker.io/jboss/keycloak
@@ -67,6 +67,28 @@ keycloak:
 
   ## Additional init containers, e. g. for providing custom themes
   extraInitContainers: |
+    - name: theme-provider
+      image: gcr.io/mtpo-prod/tax/keycloak-theme
+      imagePullSecrets:
+        - name: mtpo-prod-regsecret
+      imagePullPolicy: IfNotPresent
+      resources:
+        limits:
+          cpu: "20m"
+          memory: "64Mi"
+        requests:
+          cpu: "10m"
+          memory: "32Mi"
+      command:
+        - sh
+      args:
+        - -c
+        - |
+          echo "Copying My theme..."
+          cp -R /my-theme/* /theme
+      volumeMounts:
+        - name: theme
+          mountPath: /theme
 
   ## Additional sidecar containers, e. g. for a database proxy, such as Google's cloudsql-proxy
   extraContainers: |
@@ -84,14 +106,14 @@ keycloak:
   extraArgs: ""
 
   ## Username for the initial Keycloak admin user
-  username: keycloak
+  username: admin
 
   ## Password for the initial Keycloak admin user. Applicable only if existingSecret is not set.
   ## If not set, a random 10 characters password will be used
-  password: ""
+  password: "admin"
 
   # Specifies an existing secret to be used for the admin password
-  existingSecret: ""
+  existingSecret: "/secret/passowrd"
 
   # The key in the existing secret that stores the password
   existingSecretKey: password
@@ -199,7 +221,7 @@ keycloak:
     custom: |
 
   ## Custom startup scripts to run before Keycloak starts up
-  startupScripts: {}
+  startupScripts: mkdir -p /opt/jboss/keycloak/themes/my-theme && cp -R /theme/* /opt/jboss/keycloak/themes/my-theme/
     # mystartup.sh: |
     #   #!/bin/sh
     #
@@ -207,8 +229,12 @@ keycloak:
 
   ## Add additional volumes and mounts, e. g. for custom themes
   extraVolumes: |
+    - name: theme
+      mountPath: /theme
   extraVolumeMounts: |
-
+    - name: theme
+      mountPath: /theme
+      emptyDir: {}    
   ## Add additional ports, eg. for custom admin console
   extraPorts: |
 
@@ -319,7 +345,7 @@ keycloak:
     # Only used if existingSecret is not specified. In this case a new secret is created
     # populated by the variables below.
     dbUser: keycloak
-    dbPassword: ""
+    dbPassword: "8azfFY6uuh8ovsEwdq3IHXWSsSExk7wKgeAV1G8dR7XMZjy3BwUfUHyz0L7iQ9dE"
 
 postgresql:
   ### PostgreSQL User to create.
@@ -329,7 +355,7 @@ postgresql:
   ## PostgreSQL Password for the new user.
   ## If not set, a random 10 characters password will be used.
   ##
-  postgresqlPassword: ""
+  postgresqlPassword: "8azfFY6uuh8ovsEwdq3IHXWSsSExk7wKgeAV1G8dR7XMZjy3BwUfUHyz0L7iQ9dE"
 
   ## PostgreSQL Database to create.
   ##
