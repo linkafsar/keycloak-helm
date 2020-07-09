@@ -62,8 +62,11 @@ keycloak:
       #   value: false
   extraInitContainers: |
       - name: theme-provider
-        image: myuser/mytheme:1
+        image: gcr.io/my-project/keycloak-my-theme:v0.1.0
         imagePullPolicy: IfNotPresent
+        env:
+          - name: secret
+            value: init-secret
         command:
           - sh
         args:
