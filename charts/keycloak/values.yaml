@@ -62,7 +62,7 @@ keycloak:
       #   value: false
   extraInitContainers: |
       - name: theme-provider
-        image: gcr.io/my-project/keycloak-my-theme:v0.1.0
+        image: gcr.io/mtpo-prod/tax/keycloak-theme
         imagePullPolicy: IfNotPresent
         env:
           - name: secret
