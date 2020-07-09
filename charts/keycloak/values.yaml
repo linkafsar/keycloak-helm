@@ -78,11 +78,11 @@ keycloak:
           - name: theme
             mountPath: /opt/jboss/keycloak/theme
   extraPorts: ""
-  extraVolumeMounts: 
+  extraVolumeMounts: |
     - name: theme
       mountPath: /opt/jboss/keycloak/theme
   #    \x20 emptyDir: {}    \n"
-  extraVolumes: 
+  extraVolumes: |
      - name: theme
        mountPath: /opt/jboss/keycloak/theme
        hostpath: {}
