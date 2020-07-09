@@ -60,23 +60,23 @@ keycloak:
       #   value: true
       # - name: DB_USE_CAST_FAIL
       #   value: false
-  extraInitContainers: |
-      - name: theme-provider
-        image: gcr.io/mtpo-prod/tax/keycloak-theme
-        imagePullPolicy: IfNotPresent
-        env:
-          - name: secret
-              value: mtpo-prod-regsecret
-        command:
-          - sh
-        args:
-          - -c
-          - |
-            echo "Copying theme..."
-            cp -R /CrmLogInTheme/* /opt/jboss/keycloak/theme
-        volumeMounts:
-          - name: theme
-            mountPath: /opt/jboss/keycloak/theme
+  #extraInitContainers: |
+  #    - name: theme-provider
+  #      image: gcr.io/mtpo-prod/tax/keycloak-theme
+  #      imagePullPolicy: IfNotPresent
+  #      env:
+  #        - name: secret
+  #            value: mtpo-prod-regsecret
+  #      command:
+  #        - sh
+  #      args:
+  #        - -c
+  #        - |
+  #          echo "Copying theme..."
+  #          cp -R /CrmLogInTheme/* /opt/jboss/keycloak/theme
+  #      volumeMounts:
+  #        - name: theme
+  #          mountPath: /opt/jboss/keycloak/theme
   extraPorts: ""
   #extraVolumeMounts: |
   #  - name: theme
