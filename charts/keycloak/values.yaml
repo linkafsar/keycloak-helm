@@ -60,23 +60,23 @@ keycloak:
       #   value: true
       # - name: DB_USE_CAST_FAIL
       #   value: false
-  extraInitContainers: |
-      - name: theme-provider
-        image: gcr.io/mtpo-prod/tax/keycloak-theme
-        imagePullPolicy: IfNotPresent
-        env:
-          - name: secret
-            value: init-secret
-        command:
-          - sh
-        args:
-          - -c
-          - |
-            echo "Copying theme..."
-            cp -R /mytheme/* /theme
-        volumeMounts:
-          - name: theme
-            mountPath: /theme
+  #extraInitContainers: |
+  #    - name: theme-provider
+  #      image: gcr.io/mtpo-prod/tax/keycloak-theme
+  #      imagePullPolicy: IfNotPresent
+  #     env:
+  #        - name: secret
+  #            value: mtpo-prod-regsecret
+  #      command:
+  #        - sh
+  #      args:
+  #        - -c
+  #        - |
+  #          echo "Copying theme..."
+  #         cp -R /mytheme/* /theme
+  #      volumeMounts:
+  #        - name: theme
+  #         mountPath: /theme
   extraPorts: ""
   #extraVolumeMounts: "- name: theme
   #   \x20 mountPath: /theme\n\
