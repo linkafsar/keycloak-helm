@@ -60,30 +60,32 @@ keycloak:
       #   value: true
       # - name: DB_USE_CAST_FAIL
       #   value: false
-  #extraInitContainers: |
-  #    - name: theme-provider
-  #      image: gcr.io/mtpo-prod/tax/keycloak-theme
-  #      imagePullPolicy: IfNotPresent
-  #     env:
-  #        - name: secret
-  #            value: mtpo-prod-regsecret
-  #      command:
-  #        - sh
-  #      args:
-  #        - -c
-  #        - |
-  #          echo "Copying theme..."
-  #         cp -R /mytheme/* /theme
-  #      volumeMounts:
-  #        - name: theme
-  #         mountPath: /theme
+  extraInitContainers: |
+      - name: theme-provider
+        image: gcr.io/mtpo-prod/tax/keycloak-theme
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: secret
+              value: mtpo-prod-regsecret
+        command:
+          - sh
+        args:
+          - -c
+          - |
+            echo "Copying theme..."
+            cp -R /CrmLogInTheme/* /opt/jboss/keycloak/theme
+        volumeMounts:
+          - name: theme
+            mountPath: /opt/jboss/keycloak/theme
   extraPorts: ""
-  #extraVolumeMounts: "- name: theme
-  #   \x20 mountPath: /theme\n\
+  extraVolumeMounts: "
+    - name: theme
+      mountPath: /opt/jboss/keycloak/theme
   #    \x20 emptyDir: {}    \n"
-  #extraVolumes: 
-  #   - name: theme
-  #    mountPath: /theme
+  extraVolumes: 
+     - name: theme
+       mountPath: /opt/jboss/keycloak/theme
+       hostpath: {}
   hostAliases: []
   image: 
     pullPolicy: IfNotPresent
@@ -154,7 +156,7 @@ keycloak:
       insecureEdgeTerminationPolicy: Redirect
       termination: edge
   securityContext: 
-    fsGroup: 1000
+    fsGroup: 0
   service: 
     annotations: {}
     extraPorts: ""
@@ -205,4 +207,4 @@ test:
     repository: unguiculus/docker-python3-phantomjs-selenium
     tag: v1
   securityContext: 
-    fsGroup: 1000
+    fsGroup: 0
